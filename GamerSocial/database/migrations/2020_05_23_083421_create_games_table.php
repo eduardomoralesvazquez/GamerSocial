@@ -19,6 +19,7 @@ class CreateGamesTable extends Migration
             $table->string("owner");
             $table->text("summary");
             $table->string("platform");
+            $table->boolean("verified")->default(false);
             $table->timestamps();
         });
     }

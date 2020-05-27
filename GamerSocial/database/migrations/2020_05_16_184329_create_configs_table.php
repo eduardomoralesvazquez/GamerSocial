@@ -17,7 +17,7 @@ class CreateConfigsTable extends Migration
             $table->id();
             $table->string("nick");
             $table->integer("theme")->default(1);
-            $table->bigInteger("owner")->unsigned();
+            $table->bigInteger("user_id")->unsigned();
             $table->timestamps();
         });
     }

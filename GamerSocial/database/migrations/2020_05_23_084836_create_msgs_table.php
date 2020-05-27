@@ -15,9 +15,9 @@ class CreateMsgsTable extends Migration
     {
         Schema::create('msgs', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("owner");
+            $table->bigInteger("user_id");
             $table->text("msg");
-            $table->bigInteger("room");
+            $table->bigInteger("room_id");
             $table->timestamps();
         });
     }

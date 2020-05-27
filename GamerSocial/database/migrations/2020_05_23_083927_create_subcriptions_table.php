@@ -15,7 +15,7 @@ class CreateSubcriptionsTable extends Migration
     {
         Schema::create('subcriptions', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("game");
+            $table->bigInteger("game_id");
             $table->bigInteger("user_id");
             $table->timestamps();
         });

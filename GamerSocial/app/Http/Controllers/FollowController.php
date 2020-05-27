@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Follow;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FollowController extends Controller
 {
@@ -33,9 +34,11 @@ class FollowController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($user)
     {
-        //
+        Follow::create(["user_id"=>Auth::user()->id, "followed"=>$user]);
+        return redirect()->route("profile", $user);
+
     }
 
     /**
@@ -80,6 +83,9 @@ class FollowController extends Controller
      */
     public function destroy(Follow $follow)
     {
-        //
+        $followed = $follow->followed;
+        if(Auth::user()->id == $follow->user_id){}
+            $follow->delete();
+        return redirect()->route("profile", $followed);
     }
 }

@@ -43,3 +43,18 @@
     margin-bottom:  1em ;
     text-align: center;
 }
+.btn {
+    margin-bottom:10px;
+    border: solid #48acff 2px;
+    border-radius: 5px;
+    padding: 1vw;
+    text-align: center;
+    color: #48acff;
+    background-color: white;
+    font-size:1em;
+}
+.btn:hover {
+    cursor: pointer;
+    background-color: #48acff;
+    color: white;
+}

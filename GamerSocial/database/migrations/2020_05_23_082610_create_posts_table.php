@@ -15,11 +15,11 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("owner");
-            $table->bigInteger("thread")->nullable();
+            $table->bigInteger("user_id");
+            $table->bigInteger("post_id")->nullable();
             $table->text("text");
             $table->bigInteger("game_id")->nullable();
-            $table->bigInteger("files_id");
+            $table->bigInteger("file_id")->nullable();
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -35,7 +36,14 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "text"=>"required"
+        ]);
+        if(trim($request->text) != ""){
+            trim($request->text);            
+            Post::create(["text"=>$request->text, "user_id"=>Auth::user()->id]);
+        }
+        return redirect()->route("home");
     }
 
     /**
@@ -78,8 +86,16 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Request $request, Post $post)
     {
-        //
+        if($post->user->id == Auth::user()->id || Auth::user()->role->id == 1 || Auth::user()->role->id == 2){
+            $post->delete();
+        }
+        if($request->profile == 0){
+            return redirect()->route("home");
+        }elseif($request->profile == 1){
+            return redirect()->route("profile", Auth::user());
+        }
+        // return redirect();
     }
 }

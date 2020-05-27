@@ -18,7 +18,7 @@ class CreateReportsTable extends Migration
             $table->string("title");
             $table->bigInteger("game_id");
             $table->text("text");
-            $table->bigInteger("files_id");
+            $table->bigInteger("file_id")->nullable();
             $table->timestamps();
         });
     }

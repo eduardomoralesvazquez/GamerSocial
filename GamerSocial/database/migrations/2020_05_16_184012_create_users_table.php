@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string("last_name");
             $table->string("img")->default("/img/users/default.jpg");
             $table->string("phone")->nullable();
+            $table->string("banner")->default("/img/banners/default.png");
             $table->string("country")->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
