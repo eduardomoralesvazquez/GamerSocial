@@ -12,7 +12,7 @@
         <span>{{$user->name}}</span>
         <div id="info">
             @if (Auth::user() == $user)
-                <div><a href="#"><i class="fas fa-4x fa-cog"></i></a></div>
+                <div><a href="{{route("user.config")}}"><i class="fas fa-4x fa-cog"></i></a></div>
             @else
                 @if (Auth::user()->following($user))
                 
@@ -42,7 +42,7 @@
             @endif
         </div>
         <div id="description">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi expedita eius explicabo debitis facere, aspernatur aperiam cum nobis similique ut nemo reprehenderit qui perferendis dolores! Repellendus facilis nemo aperiam asperiores.
+            {{Auth::user()->description}}
         </div>
         <div id="select">
             <div id="post-btn">Post</div>
@@ -60,7 +60,7 @@
                         <div></div>
                     </div>
                     <div class="post-body">
-                        <div class="text-container">there are no posts @if($user == Auth::user()) ?, why do not you post something! @endif</div>
+                        <div class="text-container">there are no posts @if($user == Auth::user()) , why do not you post something! @endif</div>
                     </div>
                 </div>
                 @else
@@ -72,60 +72,67 @@
                                     <div class="user-name">{{$post->user()->first()->name}}<span class="date">{{substr($post->created_at, 0,11)}}</span></div>
                                 </div>
                                 <div>
+                                    @if($post->post_id!=null)
+                                        <a href="{{route("thread", $post->post_id)}}"><i class="far fa-2x fa-arrow-alt-circle-up thread"></i></a>
+                                    @endif
                                     @if ($user == Auth::user())
                                         <form action="{{route("post.destroy", $post)}}" method="POST" id="form{{$post->id}}">
                                             @csrf
                                             @method("DELETE")
-                                            <input type="hidden" name="profile" value="1">
+                                            <input type="hidden" name="origin" value="1">
                                             <i class="far fa-times-circle fa-2x delete" onclick="document.getElementById('form{{$post->id}}').submit();"></i>
                                         </form>
                                     @endif
                                 </div>
                             </div>
-                            <div class="post-body">
-                                <div class="text-container">{{$post->text}}</div>
-                            </div>
+                            <a href="{{route("thread", $post)}}">   
+                                <div class="post-body">
+                                    <div class="text-container">{{$post->text}}</div>
+                                </div>
+                            </a>
                         </div>
                     @endforeach
                 @endif
             </div>
             <div id="project-container" class="hide">
+                @if ($user->projects->count()==0)
                 <div class="post">
                     <div class="post-header">
                         <div>
-                            <img src="{{asset("img/users/default.jpg")}}" alt="">
-                            <div class="user-name">Ramir15</div>
+                            <img src="{{asset("img/app/icons/iconBlue.svg")}}" alt="">
+                            <div class="user-name">GamerSocial</div>
                         </div>
-                        <div><i class="far fa-times-circle fa-2x delete"></i></div>
+                        <div></div>
                     </div>
                     <div class="post-body">
-                        <div class="text-container">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit quibusdam quidem explicabo eveniet autem, repellat ea, expedita, ratione dolorum accusantium quaerat enim. Magnam, pariatur numquam. Repudiandae perferendis illo facere at.</div>
+                        <div class="text-container">This is empty @if($user->id == Auth::user()->id) , Create something! @endif </div>
                     </div>
                 </div>
-                <div class="post">
-                    <div class="post-header">
-                        <div>
-                            <img src="{{asset("img/users/default.jpg")}}" alt="">
-                            <div class="user-name">Ramir15</div>
+                @else
+                    @foreach ($user->projects->sortByDesc("created_at") as $project)
+                        <div class="post">
+                            <div class="post-header">
+                                <div>
+                                    <a href="#"><img src="{{asset($project->img)}}" alt=""></a>
+                                    <div class="user-name">{{$project->title}} by {{$project->user()->first()->name}}<span class="date">{{substr($project->created_at, 0,11)}}</span></div>
+                                </div>
+                                <div>
+                                    @if ($project->user()->first() == Auth::user())
+                                        <form action="{{route("project.destroy", $project)}}" method="POST" id="form{{$project->id}}">
+                                            @csrf
+                                            @method("DELETE")
+                                            <input type="hidden" name="profile" value="1">
+                                            <i class="far fa-times-circle fa-2x delete" onclick="document.getElementById('form{{$project->id}}').submit();"></i>
+                                        </form>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="post-body">
+                                <div class="text-container">{{$project->summary}}</div>
+                            </div>
                         </div>
-                        <div><i class="far fa-times-circle fa-2x delete"></i></div>
-                    </div>
-                    <div class="post-body">
-                        <div class="text-container">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit quibusdam quidem explicabo eveniet autem, repellat ea, expedita, ratione dolorum accusantium quaerat enim. Magnam, pariatur numquam. Repudiandae perferendis illo facere at.</div>
-                    </div>
-                </div>
-                <div class="post">
-                    <div class="post-header">
-                        <div>
-                            <img src="{{asset("img/users/default.jpg")}}" alt="">
-                            <div class="user-name">Ramir15</div>
-                        </div>
-                        <div><i class="far fa-times-circle fa-2x delete"></i></div>
-                    </div>
-                    <div class="post-body">
-                        <div class="text-container">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit quibusdam quidem explicabo eveniet autem, repellat ea, expedita, ratione dolorum accusantium quaerat enim. Magnam, pariatur numquam. Repudiandae perferendis illo facere at.</div>
-                    </div>
-                </div>
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>

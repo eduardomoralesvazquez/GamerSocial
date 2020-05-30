@@ -1,0 +1,31 @@
+.img-project {
+    width: 15em;
+    height: 15em;
+    border-radius: 50%;
+}
+.img-author {
+    width: 5em;
+    height: 5em;
+    border-radius: 50%;
+}
+h3 {
+    color: #48acff;
+}
+hr {
+    width: 100%;
+    max-width: 600px;
+    border: solid lightgray 1px;
+}
+.img-container {
+    overflow-y:scroll;
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    height: 50vh;
+}
+.img-container::-webkit-scrollbar {
+    display: none;
+}
+.img-container > div > img{
+ width: 100%;
+}

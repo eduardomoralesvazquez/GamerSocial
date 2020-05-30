@@ -17,9 +17,8 @@ class CreateProjectsTable extends Migration
             $table->id();
             $table->bigInteger("user_id")->unsigned();
             $table->string("title");
-            $table->integer("state");
+            $table->string("img");
             $table->text("summary");
-            $table->bigInteger("file_id")->nullable();
             $table->timestamps();
         });
     }

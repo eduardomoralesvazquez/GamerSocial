@@ -41,6 +41,13 @@ nav div div{
     padding: 1vw;
     margin-bottom:3em;
 }
+.sub-post {
+    max-width: 600px;
+    width: 100%;
+    border-radius: 5px;
+    padding: 1vw;
+    margin-bottom:3em;
+}
 .post:hover{
     background: #FAFAFA;
 }
@@ -52,11 +59,20 @@ nav div div{
     cursor: pointer;
     color: red;
 }
+.thread{
+    margin-right: 0.1em ;
+    cursor: pointer;
+    color: lightgrey;
+}
+.thread:hover{
+    cursor: pointer;
+    color: #48acff;
+}
 .post-header {
     padding: 1em;
     border-bottom: solid lightgrey 1px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between !important;
     align-items: center;
 }
 .post-header > div{
@@ -75,6 +91,7 @@ nav div div{
 .post-header img {
     margin-right: 1em;
     height: 4em;
+    width: 4em;
     border-radius:50% ;
 }
 .post-body {
@@ -192,6 +209,9 @@ textarea {
     resize: none;
     border: none;
     padding: 0.5em;
+}
+textarea:focus {
+    color: #48acff;
 }
 .close-post-form {
     cursor: pointer;

@@ -8,10 +8,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use App\Follow;
 use App\Room;
-use App\Subcription;
 use App\Msg;
 use App\Project;
-use App\Conig;
+use App\Config;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -23,7 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role_id', 'real_name','last_name', "img", "banner"
+        'name', 'email', 'password', 'role_id', 'real_name','last_name', "img", "banner", "description"
     ];
 
     /**
@@ -46,11 +45,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function role(){
         return $this->belongsTo("App\Role");
     }
-    public function subcription(){
-        return $this->hasMany(Subcription::class);
-    }
     public function room(){
         return $this->hasMany(Room::class);
+    }
+    public function projects(){
+        return $this->hasMany(Project::class);
     }
     public function msg(){
         return $this->hasMany(Msg::class);

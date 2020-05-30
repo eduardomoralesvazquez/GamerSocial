@@ -19,8 +19,8 @@
         <div>
             <a href="{{route("profile", Auth::user())}}">{{Auth::user()->name}}</a>
             <a href="#">Chats</a>
-            <a href="#">Config</a>
-            <a href="#">Subscribed</a>
+            <a href="{{route("user.config")}}">Config</a>
+            <a href="#">Followed</a>
             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">LogOut</a>
             <a href="#" id="close-menu"><i class="fas fa-arrow-left"></i></a>
         </div>
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div><a href="{{route("home")}}"><img src="{{asset("img/app/icons/iconWhite.svg")}}" alt=""></a></div>
-            <div><a href="#"><img src="{{asset("img/app/icons/devWhite.svg")}}" alt=""></a></div>
+            <div><a href="{{route("project")}}"><img src="{{asset("img/app/icons/devWhite.svg")}}" alt=""></a></div>
             <div><a href="#"><img src="{{asset("img/app/icons/searchWhite.svg")}}" alt=""></a></div>
         </div>
     </nav>

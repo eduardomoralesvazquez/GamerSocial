@@ -15,7 +15,8 @@ class CreateFilesTable extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->longText("routes")->nullable();
+            $table->bigInteger("project_id")->unsigned();
+            $table->string("route")->nullable();
             $table->timestamps();
         });
     }

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use App\File;
 
 class ProjectController extends Controller
 {
@@ -35,7 +38,42 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "img" => ["required", "image"],
+            "title" => ["required"],
+            "summary" => ["required"]
+        ]);
+        
+        if($request->has("files")){
+            $request->validate([
+                "files.*"=>["image"]
+            ]);
+        }
+
+        $file = $request->file("img");
+        $name = "projects/".time()."_".$file->getClientOriginalName();
+        Storage::disk("public")->put($name, \File::get($file));
+        $project = Project::create([
+            
+            "user_id" => Auth::user()->id,
+            "title" => $request->title,
+            "summary" => $request->summary,
+            "img"=> "img/".$name
+
+        ]);
+        if($request->has("files")){
+            foreach($request->file("files") as $picture){
+                $name = "projects/galleries/".time()."_".$picture->getClientOriginalName();
+    
+                Storage::disk("public")->put($name, \File::get($picture));
+                File::create([
+                    "project_id" => $project->id,
+                    "route"=> "img/".$name 
+                ]);
+            }
+        }
+        return redirect()->route("project");
+
     }
 
     /**
@@ -78,8 +116,21 @@ class ProjectController extends Controller
      * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project)
+    public function destroy(Project $project, Request $request)
     {
-        //
+        if($project->user()->first()->id == Auth::user()->id){
+
+            foreach($project->files()->get() as $file){
+                unlink($file->route);
+            }
+            unlink($project->img);
+            $project->delete();
+
+        }
+        if($request->profile == 0){
+            return redirect()->route("project");
+        }elseif($request->profile == 1){
+            return redirect()->route("profile", Auth::user());
+        }
     }
 }

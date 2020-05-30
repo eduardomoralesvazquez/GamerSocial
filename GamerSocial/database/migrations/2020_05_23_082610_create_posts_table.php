@@ -17,9 +17,8 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->bigInteger("user_id");
             $table->bigInteger("post_id")->nullable();
+            $table->bigInteger("project_id")->nullable();
             $table->text("text");
-            $table->bigInteger("game_id")->nullable();
-            $table->bigInteger("file_id")->nullable();
             $table->timestamps();
         });
     }
