@@ -17,6 +17,9 @@
     @error('last_name')
         <h3 class="error">{{ $message }}</h3>
     @enderror
+    @error('email')
+        <h3 class="error">{{ $message }}</h3>
+    @enderror
     <a href="{{route("login")}}">
         <img id="icon" src="{{asset("img\app\icons\iconBlue.svg")}}" alt="GamerSocial">            
     </a>       

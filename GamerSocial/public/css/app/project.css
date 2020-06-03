@@ -4,6 +4,7 @@
     top: 90vh;
 }
 .project-form-icon {
+    cursor: pointer;
     padding: 0.5em;
     border-radius: 50%;
     background: rgba(75, 172, 255, 0.5);

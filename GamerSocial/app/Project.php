@@ -9,7 +9,7 @@ use App\Post;
 
 class Project extends Model
 {
-    protected $fillable = ["user_id", "title", "summary", "img"];
+    protected $fillable = ["user_id", "title", "summary", "img", "link"];
 
     public function user(){
         return $this->belongsTo(User::class);
@@ -19,5 +19,8 @@ class Project extends Model
     }
     public function posts(){
         return $this->hasMany(Post::class);
+    }
+    public function scopeTitle($query, $title){
+        return $query->where('title',"like", "%$title%");
     }
 }

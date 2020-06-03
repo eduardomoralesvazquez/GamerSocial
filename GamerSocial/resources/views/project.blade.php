@@ -17,7 +17,7 @@
         <i class="fas fa-2x fa-plus project-form-icon"></i>
     </div>
     <div class="project-form hide">
-        <form action="{{route("project.create")}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route("projectuser.create")}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="top-project-form">
                 <i class="far fa-times-circle fa-2x close-project-form"></i>
@@ -34,6 +34,9 @@
                 </div>
                 <div class="summary-container">
                     <textarea class="project-content-form" placeholder="What is your project about?" row="auto" name="summary"></textarea>
+                </div>
+                <div class="title-container">
+                    <input type="text" name="link" class="title" id="link" placeholder="Is not enough with images?, link your project!">
                 </div>
                 <button class="btn" type="submit">Make Project</button>
             </div>
@@ -54,7 +57,7 @@
         </div>
     </div>
     @else
-        @foreach ($projects->sortByDesc("created_at") as $project)
+        @foreach ($projects as $project)
             <div class="post">
                 <div class="post-header">
                     <div>
@@ -63,10 +66,10 @@
                     </div>
                     <div>
                         @if ($project->user()->first() == Auth::user())
-                            <form action="{{route("project.destroy", $project)}}" method="POST" id="form{{$project->id}}">
+                            <form action="{{route("projectuser.destroy", $project)}}" method="POST" id="form{{$project->id}}">
                                 @csrf
                                 @method("DELETE")
-                                <input type="hidden" name="profile" value="0">
+                                <input type="hidden" name="origin" value="0">
                                 <i class="far fa-times-circle fa-2x delete" onclick="document.getElementById('form{{$project->id}}').submit();"></i>
                             </form>
                         @endif
@@ -83,4 +86,5 @@
 </div>
 @endsection
 @section('js')
+<script src="{{asset("js/pagination/project.js")}}"></script>
 @endsection

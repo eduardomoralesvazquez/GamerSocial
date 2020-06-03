@@ -69,6 +69,14 @@ class User extends Authenticatable implements MustVerifyEmail
     public function test($user){
         return Follow::where("user_id", $this->id)->where("followed", $user->id)->count();
     }
+    public function getFollowers(){
+        $followersId = Follow::where("followed", $this->id)->pluck("user_id");
+        return User::whereIn("id", $followersId)->get();
+    }
+    public function getFollowing(){
+        $followingId = Follow::where("user_id", $this->id)->pluck("followed");
+        return User::whereIn("id", $followingId)->get();
+    }
     public function following(User $user){
         if(Follow::where("user_id", $this->id)->where("followed", $user->id)->count()){
             return true;
@@ -88,7 +96,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function postFollow(){
         $follow = $this->follow()->pluck("followed")->toArray();
         $follow[]=$this->id;
-        $posts = Post::all()->whereIn("user_id", $follow);
-        return $posts->sortByDesc("created_at");
+        $posts = Post::whereIn("user_id", $follow)->orderByDesc("created_at")->paginate(5);
+        return $posts;
+    }
+    public function scopeName($query, $name){
+        return $query->where('name',"like", "%$name%");
     }
 }

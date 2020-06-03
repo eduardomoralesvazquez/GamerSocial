@@ -29,3 +29,10 @@ hr {
 .img-container > div > img{
  width: 100%;
 }
+.link-icon{
+    margin-bottom: 0.5em;
+    color: lightgray;
+}
+.link-icon:hover{
+    color: #48acff;
+}

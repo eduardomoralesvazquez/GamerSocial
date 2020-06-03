@@ -16,7 +16,7 @@
             @else
                 @if (Auth::user()->following($user))
                 
-                    <form id="unfollow" action="{{ route('follow.destroy', Auth::user()->follow()->where("followed", $user->id)->first())}}" method="POST" style="display: none;">
+                    <form id="unfollow" action="{{ route('followuser.destroy', Auth::user()->follow()->where("followed", $user->id)->first())}}" method="POST" style="display: none;">
                         @csrf
                         @method("DELETE")
                     </form>
@@ -31,7 +31,7 @@
         
                 @else
     
-                    <div><a href="{{route("follow.create", $user)}}"><i class="fas fa-4x fa-user-friends"></i></a></div>
+                    <div><a href="{{route("followuser.create", $user)}}"><i class="fas fa-4x fa-user-friends"></i></a></div>
 
                 @endif
                 @if(Auth::user()->friends($user))
@@ -45,11 +45,11 @@
             {{Auth::user()->description}}
         </div>
         <div id="select">
-            <div id="post-btn">Post</div>
+            <div id="post-btn" class="active">Post</div>
             <div id="project-btn">Project</div>
         </div>
         <div class="container">
-            <div id="post-container" class="hide">
+            <div id="post-container" >
                 @if ($user->post()->count()==0)
                 <div class="post">
                     <div class="post-header">
@@ -72,11 +72,14 @@
                                     <div class="user-name">{{$post->user()->first()->name}}<span class="date">{{substr($post->created_at, 0,11)}}</span></div>
                                 </div>
                                 <div>
+                                    @if($post->project_id!=null)
+                                        <a href="{{route("projectview", $post->project_id)}}"><i class="far fa-2x fa-question-circle thread"></i></a>
+                                    @endif
                                     @if($post->post_id!=null)
                                         <a href="{{route("thread", $post->post_id)}}"><i class="far fa-2x fa-arrow-alt-circle-up thread"></i></a>
                                     @endif
                                     @if ($user == Auth::user())
-                                        <form action="{{route("post.destroy", $post)}}" method="POST" id="form{{$post->id}}">
+                                        <form action="{{route("postuser.destroy", $post)}}" method="POST" id="form{{$post->id}}">
                                             @csrf
                                             @method("DELETE")
                                             <input type="hidden" name="origin" value="1">
@@ -113,23 +116,25 @@
                         <div class="post">
                             <div class="post-header">
                                 <div>
-                                    <a href="#"><img src="{{asset($project->img)}}" alt=""></a>
+                                    <a href="{{route("projectview", $project)}}"><img src="{{asset($project->img)}}" alt=""></a>
                                     <div class="user-name">{{$project->title}} by {{$project->user()->first()->name}}<span class="date">{{substr($project->created_at, 0,11)}}</span></div>
                                 </div>
                                 <div>
                                     @if ($project->user()->first() == Auth::user())
-                                        <form action="{{route("project.destroy", $project)}}" method="POST" id="form{{$project->id}}">
+                                        <form action="{{route("projectuser.destroy", $project)}}" method="POST" id="form{{$project->id}}">
                                             @csrf
                                             @method("DELETE")
-                                            <input type="hidden" name="profile" value="1">
+                                            <input type="hidden" name="origin" value="1">
                                             <i class="far fa-times-circle fa-2x delete" onclick="document.getElementById('form{{$project->id}}').submit();"></i>
                                         </form>
                                     @endif
                                 </div>
                             </div>
-                            <div class="post-body">
-                                <div class="text-container">{{$project->summary}}</div>
-                            </div>
+                            <a href="{{route("projectview", $project)}}">
+                                <div class="post-body">
+                                    <div class="text-container">{{$project->summary}}</div>
+                                </div>
+                            </a>
                         </div>
                     @endforeach
                 @endif

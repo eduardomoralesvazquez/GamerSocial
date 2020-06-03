@@ -36,8 +36,6 @@ class FollowController extends Controller
      */
     public function store($user)
     {
-        Follow::create(["user_id"=>Auth::user()->id, "followed"=>$user]);
-        return redirect()->route("profile", $user);
 
     }
 
@@ -83,9 +81,21 @@ class FollowController extends Controller
      */
     public function destroy(Follow $follow)
     {
+    }
+
+    //Methods to users--------------------------------------------------
+
+    public function userDestroy(Follow $follow)
+    {
         $followed = $follow->followed;
         if(Auth::user()->id == $follow->user_id){}
             $follow->delete();
         return redirect()->route("profile", $followed);
+    }
+    public function userStore($user)
+    {
+        Follow::create(["user_id"=>Auth::user()->id, "followed"=>$user]);
+        return redirect()->route("profile", $user);
+
     }
 }

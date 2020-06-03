@@ -11,6 +11,10 @@ use App\User;
 class UserController extends Controller
 {
     public function update(Request $request){
+
+    }
+    //Method to users--------------------------------------------------------
+    public function userUpdate(Request $request){
         $request->validate([
             "name"=>["required"],
             "description"=>["required"]

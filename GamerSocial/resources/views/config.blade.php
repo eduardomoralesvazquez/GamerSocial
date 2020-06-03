@@ -10,7 +10,7 @@
         @error('banner')
             <h3 class="error">{{ $message }}</h3>
         @enderror
-        <form class="config-form" method="POST" action="{{route("user.update")}}" enctype="multipart/form-data">
+        <form class="config-form" method="POST" action="{{route("useruser.update")}}" enctype="multipart/form-data">
             @csrf
             @method("PUT")
             <div>

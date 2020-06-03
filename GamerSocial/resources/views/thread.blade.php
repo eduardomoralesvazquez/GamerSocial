@@ -7,7 +7,7 @@
         <i class="fas fa-2x fa-pen-nib post-form-icon"></i>
     </div>
     <div class="post-form hide">
-        <form action="{{route("post.create")}}" method="POST">
+        <form action="{{route("postuser.create")}}" method="POST">
             @csrf
             <input type="hidden" name="thread" value="{{$post->id}}">
             <input type="hidden" name="origin" value="1">
@@ -34,10 +34,10 @@
                     <a href="{{route("projectview", $post->project_id)}}"><i class="far fa-2x fa-question-circle thread"></i></a>
                 @endif
                 @if ($post->user()->first() == Auth::user())
-                    <form action="{{route("post.destroy", $post)}}" method="POST" id="form{{$post->id}}">
+                    <form action="{{route("postuser.destroy", $post)}}" method="POST" id="form{{$post->id}}">
                         @csrf
                         @method("DELETE")
-                        <input type="hidden" name="profile" value="0">
+                        <input type="hidden" name="origin" value="0">
                         <i class="far fa-times-circle fa-2x delete" onclick="document.getElementById('form{{$post->id}}').submit();"></i>
                     </form>
                 @endif
@@ -56,7 +56,7 @@
             </div>
             <div>
                 @if ($subPost->user()->first() == Auth::user())
-                    <form action="{{route("post.destroy", $subPost)}}" method="POST" id="form{{$subPost->id}}">
+                    <form action="{{route("postuser.destroy", $subPost)}}" method="POST" id="form{{$subPost->id}}">
                         @csrf
                         @method("DELETE")
                         <input type="hidden" name="origin" value="3">

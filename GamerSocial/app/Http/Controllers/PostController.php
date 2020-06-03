@@ -37,41 +37,6 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        switch($request->origin){
-            case 0:
-                $request->validate([
-                    "text"=>"required"
-                ]);
-                if(trim($request->text) != ""){
-                    trim($request->text);            
-                    Post::create(["text"=>$request->text, "user_id"=>Auth::user()->id]);
-                }
-                return redirect()->route("home");
-                break;
-            case 1: 
-
-                $request->validate([
-                    "text"=>"required",
-                    "thread"=>"required"
-                ]);
-                if(trim($request->text) != ""){
-                    trim($request->text);            
-                    Post::create(["text"=>$request->text, "user_id"=>Auth::user()->id, "post_id"=>$request->thread]);
-                }
-                return redirect()->route("thread", Post::find($request->thread));
-                break;
-            case 2:
-                $request->validate([
-                    "text"=>"required",
-                    "project"=>"required"
-                ]);
-                if(trim($request->text) != ""){
-                    trim($request->text);
-                    $post = Post::create(["text"=>$request->text, "user_id"=>Auth::user()->id, "project_id"=>$request->project]);
-                }
-                return redirect()->route("projectview", Project::find($request->project));
-                break;
-        }
     }
 
     /**
@@ -116,6 +81,51 @@ class PostController extends Controller
      */
     public function destroy(Request $request, Post $post)
     {
+        
+    }
+
+    //Method to users--------------------------------------------------
+
+    public function userStore(Request $request)
+    {
+        switch($request->origin){
+            case 0:
+                $request->validate([
+                    "text"=>"required"
+                ]);
+                if(trim($request->text) != ""){
+                    trim($request->text);            
+                    Post::create(["text"=>$request->text, "user_id"=>Auth::user()->id]);
+                }
+                return redirect()->route("home");
+                break;
+            case 1: 
+
+                $request->validate([
+                    "text"=>"required",
+                    "thread"=>"required"
+                ]);
+                if(trim($request->text) != ""){
+                    trim($request->text);            
+                    Post::create(["text"=>$request->text, "user_id"=>Auth::user()->id, "post_id"=>$request->thread]);
+                }
+                return redirect()->route("thread", Post::find($request->thread));
+                break;
+            case 2:
+                $request->validate([
+                    "text"=>"required",
+                    "project"=>"required"
+                ]);
+                if(trim($request->text) != ""){
+                    trim($request->text);
+                    $post = Post::create(["text"=>$request->text, "user_id"=>Auth::user()->id, "project_id"=>$request->project]);
+                }
+                return redirect()->route("projectview", Project::find($request->project));
+                break;
+        }
+    }
+    public function userDestroy(Request $request, Post $post)
+    {
         $request->validate([
             "origin"=>["required"]
         ]);
@@ -127,8 +137,8 @@ class PostController extends Controller
                 return redirect()->route("home");
                 break;
             case 1:
-                break;
                 return redirect()->route("profile", Auth::user());
+                break;
             case 2:
                 return redirect()->route("projectview", $request->project);
                 break;
@@ -136,6 +146,5 @@ class PostController extends Controller
                 return redirect()->route("thread", $request->thread);
 
         }
-        // return redirect();
     }
 }

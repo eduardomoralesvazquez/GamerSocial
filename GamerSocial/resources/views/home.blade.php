@@ -3,11 +3,11 @@
 @endsection
 @section('content')
 <div class="container">
-    <div class="post-form-icon-container">
+    <div class="post-form-icon-container" >
         <i class="fas fa-2x fa-pen-nib post-form-icon"></i>
     </div>
     <div class="post-form hide">
-        <form action="{{route("post.create")}}" method="POST">
+        <form action="{{route("postuser.create")}}" method="POST">
             @csrf            
             <input type="hidden" name="origin" value="0">
             <div class="top-post-form">
@@ -49,7 +49,7 @@
                             <a href="{{route("projectview", $post->project_id)}}"><i class="far fa-2x fa-question-circle thread"></i></a>
                         @endif
                         @if ($post->user()->first() == Auth::user())
-                            <form action="{{route("post.destroy", $post)}}" method="POST" id="form{{$post->id}}">
+                            <form action="{{route("postuser.destroy", $post)}}" method="POST" id="form{{$post->id}}">
                                 @csrf
                                 @method("DELETE")
                                 <input type="hidden" name="origin" value="0"/>
@@ -69,4 +69,5 @@
 </div>
 @endsection
 @section('js')
+<script src="{{asset("js/pagination/home.js")}}"></script>
 @endsection

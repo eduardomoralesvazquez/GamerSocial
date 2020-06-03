@@ -8,7 +8,7 @@
         <i class="fas fa-2x fa-pen-nib post-form-icon"></i>
     </div>
     <div class="post-form hide">
-        <form action="{{route("post.create")}}" method="POST">
+        <form action="{{route("postuser.create")}}" method="POST">
             @csrf            
             <input type="hidden" name="origin" value="2">
             <input type="hidden" name="project" value="{{$project->id}}">
@@ -38,10 +38,17 @@
         GALLERY
     </h3>
     <div class="img-container">
+        @if ($project->files->count() == 0)
+            <div><img src="{{asset("img/projects/galleries/sadkitty.jpg")}}" alt=""></div>
+        @endif
         @foreach ($project->files as $file)
             <div><img src="{{asset($file->route)}}" alt=""></div>
         @endforeach
     </div>
+    @if($project->link)
+        <h3>Link to Project</h3>
+        <a href="{{$project->link}}"><i class="fas fa-2x fa-link link-icon"></i></a>
+    @endif
     <hr/>
     <h3>COMMENT</h3>
     @foreach ($project->posts as $post)
@@ -53,7 +60,7 @@
                 </div>
                 <div>
                     @if ($post->user()->first() == Auth::user())
-                        <form action="{{route("post.destroy", $post)}}" method="POST" id="form{{$post->id}}">
+                        <form action="{{route("postuser.destroy", $post)}}" method="POST" id="form{{$post->id}}">
                             @csrf
                             @method("DELETE")
                             <input type="hidden" name="origin" value="2"/>

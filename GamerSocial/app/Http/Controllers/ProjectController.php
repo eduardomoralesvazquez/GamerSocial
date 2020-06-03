@@ -49,6 +49,11 @@ class ProjectController extends Controller
                 "files.*"=>["image"]
             ]);
         }
+        if($request->link!=null){
+            $request->validate([
+                "link"=>["url"]
+            ]);
+        }
 
         $file = $request->file("img");
         $name = "projects/".time()."_".$file->getClientOriginalName();
@@ -61,6 +66,9 @@ class ProjectController extends Controller
             "img"=> "img/".$name
 
         ]);
+        if($request->link!=null){
+            $project->update(["link" => $request->link]);
+        }
         if($request->has("files")){
             foreach($request->file("files") as $picture){
                 $name = "projects/galleries/".time()."_".$picture->getClientOriginalName();
@@ -118,6 +126,59 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project, Request $request)
     {
+    }
+
+    //Method to users-----------------------------------------------------------
+
+    public function userStore(Request $request)
+    {
+        $request->validate([
+            "img" => ["required", "image"],
+            "title" => ["required"],
+            "summary" => ["required"]
+        ]);
+        
+        if($request->has("files")){
+            $request->validate([
+                "files.*"=>["image"]
+            ]);
+        }
+        if($request->link!=null){
+            $request->validate([
+                "link"=>["url"]
+            ]);
+        }
+
+        $file = $request->file("img");
+        $name = "projects/".time()."_".$file->getClientOriginalName();
+        Storage::disk("public")->put($name, \File::get($file));
+        $project = Project::create([
+            
+            "user_id" => Auth::user()->id,
+            "title" => $request->title,
+            "summary" => $request->summary,
+            "img"=> "img/".$name
+
+        ]);
+        if($request->link!=null){
+            $project->update(["link" => $request->link]);
+        }
+        if($request->has("files")){
+            foreach($request->file("files") as $picture){
+                $name = "projects/galleries/".time()."_".$picture->getClientOriginalName();
+    
+                Storage::disk("public")->put($name, \File::get($picture));
+                File::create([
+                    "project_id" => $project->id,
+                    "route"=> "img/".$name 
+                ]);
+            }
+        }
+        return redirect()->route("project");
+
+    }
+    public function userDestroy(Project $project, Request $request)
+    {
         if($project->user()->first()->id == Auth::user()->id){
 
             foreach($project->files()->get() as $file){
@@ -127,10 +188,16 @@ class ProjectController extends Controller
             $project->delete();
 
         }
-        if($request->profile == 0){
-            return redirect()->route("project");
-        }elseif($request->profile == 1){
-            return redirect()->route("profile", Auth::user());
+        switch($request->origin){
+            case 0:
+                return redirect()->route("project");
+                break;
+            case 1:
+                return redirect()->route("profile", Auth::user());
+                break;
+            case 2:
+                return redirect()->route("search");
+                break;
         }
     }
 }
