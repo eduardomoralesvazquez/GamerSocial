@@ -1,0 +1,170 @@
+.crud-nav-container {
+    margin-top: 2em !important;
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.crud-nav-container > a {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    border-bottom: #48acff solid 2px;
+    text-decoration: none;
+    color: #48acff;
+    font-size: 1em;
+    padding: 1em;
+}
+.crud-nav-container > a:hover {
+    background-color: #FAFAFA;
+    
+}
+.actived {
+    background-color: #48acff !important;
+    color: white !important;
+}
+.table-container{
+    margin-top: 2em !important;
+    width: 100%;
+    max-width: 800px;
+    margin:auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th {
+    color: #48acff;
+    border-bottom: #48acff solid 2px;
+}
+td {
+    color: lightgray;
+    padding: 1em;
+}
+tr:hover {
+    background-color: #FAFAFA;
+}
+.edit {
+    cursor: pointer;
+    color: lightgray;
+}
+.edit:hover {
+    color: #48acff;
+}
+.img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.paginate-controller {
+    width: 100%;
+    margin: auto;
+}
+.info-btn {
+    color: lightgray;
+}
+.info-btn:hover {
+    color: #48acff;
+
+}
+ul {
+    list-style: none;
+    display: flex;
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    margin-top: 1em;
+    justify-content: space-around;
+}
+ol {
+    padding: 1em;
+}
+.disabled {
+    color: lightgray;
+}
+.active {
+    color: #48acff;
+}
+.delete {
+    color: lightgrey;
+    border: none;
+    background-color: white;
+}
+.delete:hover {
+    color: red;
+}
+tr:hover .delete{
+    background-color: #FAFAFA;
+}
+.create-btn-container{
+    margin-top:1em !important;
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.create-btn {
+    color: lightgrey !important;
+}
+.create-btn:hover {
+    color: #48acff !important;
+    display: flex;
+}
+.search-form > input[type="text"]{
+    border-radius: 25px;
+    border: lightgrey solid 1px;
+    color: lightgrey;
+    padding: 0.5em;
+}
+.search-form > input[type="text"]:focus{
+    
+    border: #48acff solid 1px;
+    color: #48acff;
+    
+}
+.search-form > button{
+    
+    cursor: pointer;
+    border: none;
+    background-color:white;
+
+}
+.search-form > button > i{
+
+    color: lightgrey;
+
+}
+.search-form > button > i:hover{
+
+    color: #48acff;
+
+}
+.rol-select {
+
+    border: lightgrey solid 1px;
+    padding: 0.5em;
+    border-radius: 25px;
+    margin-right: 1em;
+    color: lightgrey;
+    
+}
+.rol-select:focus {
+
+    border: #48acff solid 1px;
+    color: #48acff;
+    
+}

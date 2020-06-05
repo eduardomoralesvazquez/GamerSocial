@@ -15,9 +15,18 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if(Auth::user()->role->name == "administrator" || Auth::user()->role->name == "moderator"){
+
+            $projects = Project::orderByDesc("id")->title($request->title)->user($request->id)->paginate("5");
+            return view("crud.projects.index", compact("projects", "request"));
+
+        }else{
+
+            return view("home");
+
+        }
     }
 
     /**
@@ -38,49 +47,6 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            "img" => ["required", "image"],
-            "title" => ["required"],
-            "summary" => ["required"]
-        ]);
-        
-        if($request->has("files")){
-            $request->validate([
-                "files.*"=>["image"]
-            ]);
-        }
-        if($request->link!=null){
-            $request->validate([
-                "link"=>["url"]
-            ]);
-        }
-
-        $file = $request->file("img");
-        $name = "projects/".time()."_".$file->getClientOriginalName();
-        Storage::disk("public")->put($name, \File::get($file));
-        $project = Project::create([
-            
-            "user_id" => Auth::user()->id,
-            "title" => $request->title,
-            "summary" => $request->summary,
-            "img"=> "img/".$name
-
-        ]);
-        if($request->link!=null){
-            $project->update(["link" => $request->link]);
-        }
-        if($request->has("files")){
-            foreach($request->file("files") as $picture){
-                $name = "projects/galleries/".time()."_".$picture->getClientOriginalName();
-    
-                Storage::disk("public")->put($name, \File::get($picture));
-                File::create([
-                    "project_id" => $project->id,
-                    "route"=> "img/".$name 
-                ]);
-            }
-        }
-        return redirect()->route("project");
 
     }
 
@@ -126,6 +92,21 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project, Request $request)
     {
+        if(Auth::user()->role->name == "administrator" || Auth::user()->role->name == "moderator"){
+
+            foreach($project->files()->get() as $file){
+                unlink($file->route);
+            }
+            unlink($project->img);
+            $project->delete();
+            
+            return redirect()->route("project.index");
+            
+        }else{
+
+            return view("home");
+
+        }
     }
 
     //Method to users-----------------------------------------------------------

@@ -12,4 +12,11 @@ class File extends Model
     public function projects(){
         return $this->belongsTo(Project::class);
     }
+    public function scopeProject($query, $project){
+        if($project != null)
+
+            return $query->where('project_id',"=", $project);
+        
+        return $query;
+    }
 }

@@ -26,6 +26,18 @@ input[type="text"] {
     border-radius: 10px;
     text-align: center;
 }
+input[type="password"] {
+    margin-top:1em;
+    border: solid lightgray 1px;
+    border-radius: 10px;
+    text-align: center;
+}
+input[type="email"] {
+    margin-top:1em;
+    border: solid lightgray 1px;
+    border-radius: 10px;
+    text-align: center;
+}
 input:focus {
     border:solid #48acff 1px;
     color:#48acff;

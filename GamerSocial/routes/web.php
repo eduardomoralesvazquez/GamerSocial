@@ -28,6 +28,13 @@ Auth::routes(["verify" => true]);
 
 //GET routes-----------------------------------------------------------------------------------------------------------------------------
 
+Route::get("/crud", function () {
+    if((Auth::user()->role->name == "administrator") || (Auth::user()->role->name == "moderator")){    
+        return view("crud.crud");
+    }else{
+        return redirect()->route("home");
+    }
+})->name('crud')->middleware("verified");
 Route::get('/home', 'HomeController@index')->name('home')->middleware("verified");
 Route::get("/dev", function (){ return view("devcontact"); })->name("developer");
 Route::get("/profile/{user}", function(User $user){ return view("profile", compact("user")); })->name("profile")->middleware("verified");;
@@ -67,6 +74,16 @@ Route::get("/search/paginate/project", "PaginateController@searchProjectResponse
 
 //GET CRUD routes-------------------------------------------------------------------------------------------------------------------------------
 
+    //index
+Route::get("/crud/file", "FileController@index")->name("file.index")->middleware("verified");
+Route::get("/crud/user", "UserController@index")->name("user.index")->middleware("verified");
+Route::get("/crud/project", "ProjectController@index")->name("project.index")->middleware("verified");
+Route::get("/crud/post", "PostController@index")->name("post.index")->middleware("verified");
+    //create
+Route::get("/crud/user/create", "UserController@create")->name("user.create")->middleware("verified");
+    //edit
+Route::get("/crud/user/{user}/edit", "UserController@edit")->name("user.edit")->middleware("verified");
+
 //DELETE routes---------------------------------------------------------------------------------------------------------------------------------
 
 Route::delete("/delete/{post}", "PostController@userDestroy")->name("postuser.destroy")->middleware("verified");
@@ -75,6 +92,11 @@ Route::delete("/deletep/{project}", "ProjectController@userDestroy")->name("proj
 
 //DELETE CRUD routes----------------------------------------------------------------------------------------------------------------------------
 
+Route::delete("/crud/user/{user}", "UserController@destroy")->name("user.destroy")->middleware("verified");
+Route::delete("/crud/project/{project}", "ProjectController@destroy")->name("project.destroy")->middleware("verified");
+Route::delete("/crud/post/{post}", "PostController@destroy")->name("post.destroy")->middleware("verified");
+Route::delete("/crud/file/{file}", "FileController@destroy")->name("file.destroy")->middleware("verified");
+
 //POST routes-----------------------------------------------------------------------------------------------------------------------------------
 
 Route::post("/createpost", "PostController@userStore")->name("postuser.create")->middleware("verified");
@@ -82,6 +104,9 @@ Route::post("/createproject", "ProjectController@userStore")->name("projectuser.
 
 //POST CRUD routes------------------------------------------------------------------------------------------------------------------------------
 
+Route::post("/crud/user", "UserController@store")->name("user.store")->middleware("verified");
+
 //PUT-------------------------------------------------------------------------------------------------------------------------------------------
 
 Route::put("/updateuser", "UserController@userUpdate")->name("useruser.update")->middleware("verified");
+Route::put("/user/{user}", "UserController@update")->name("user.update")->middleware("verified");

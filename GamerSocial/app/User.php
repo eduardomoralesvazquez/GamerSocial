@@ -22,7 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role_id', 'real_name','last_name', "img", "banner", "description"
+        'name', 'email', 'password', 'role_id', 'real_name','last_name', "img", "banner", "description", "email_verified_at"
     ];
 
     /**
@@ -101,5 +101,16 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     public function scopeName($query, $name){
         return $query->where('name',"like", "%$name%");
+    }
+    public function scopeRole($query, $role){
+        if($role != 0 && $role !=null){
+        
+            return $query->where('role_id',"=", "$role");
+    
+        }else{
+
+            return $query;
+
+        }
     }
 }

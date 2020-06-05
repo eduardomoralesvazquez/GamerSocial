@@ -16,7 +16,7 @@ class RoleSeeder extends Seeder
         DB::table("roles")->truncate();
         DB::statement("SET FOREIGN_KEY_CHECKS = 1;");
         Role::create([
-            "name"=>"administrador",
+            "name"=>"administrator",
             "description"=>"This role has administrative power on the website",
         ]);
         Role::create([

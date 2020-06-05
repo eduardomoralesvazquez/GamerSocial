@@ -42,7 +42,7 @@
             @endif
         </div>
         <div id="description">
-            {{Auth::user()->description}}
+            {{$user->description}}
         </div>
         <div id="select">
             <div id="post-btn" class="active">Post</div>

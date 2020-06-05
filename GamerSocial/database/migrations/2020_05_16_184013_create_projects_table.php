@@ -21,6 +21,13 @@ class CreateProjectsTable extends Migration
             $table->string("link")->nullable();
             $table->text("summary");
             $table->timestamps();
+            
+            $table->foreign("user_id")
+            ->references("id")
+            ->on("users")
+            ->onDelete("cascade")
+            ->onUpdate("cascade");
+
         });
     }
 

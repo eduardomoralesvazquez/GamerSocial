@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FileController extends Controller
 {
@@ -12,9 +13,16 @@ class FileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if(Auth::user()->role->name == "administrator" || Auth::user()->role->name == "moderator"){
+            $files = File::orderByDesc("id")->project($request->id)->paginate("5");
+            return view("crud.files.index", compact("files", "request"));
+        }else{
+
+            return view("home");
+
+        }
     }
 
     /**
@@ -80,6 +88,17 @@ class FileController extends Controller
      */
     public function destroy(File $file)
     {
-        //
+        if(Auth::user()->role->name == "administrator" || Auth::user()->role->name == "moderator"){
+
+            unlink($file->route);
+            $file->delete();
+
+            return redirect()->route("file.index");
+            
+        }else{
+
+            return view("home");
+
+        }
     }
 }

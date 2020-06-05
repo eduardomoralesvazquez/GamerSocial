@@ -16,8 +16,14 @@ class CreateFilesTable extends Migration
         Schema::create('files', function (Blueprint $table) {
             $table->id();
             $table->bigInteger("project_id")->unsigned();
-            $table->string("route")->nullable();
+            $table->string("route");
             $table->timestamps();
+
+            $table->foreign("project_id")
+            ->references("id")
+            ->on("projects")
+            ->onDelete("cascade")
+            ->onUpdate("cascade");
         });
     }
 

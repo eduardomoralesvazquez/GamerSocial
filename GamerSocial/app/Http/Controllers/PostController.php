@@ -14,9 +14,18 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if(Auth::user()->role->name == "administrator" || Auth::user()->role->name == "moderator"){
+
+            $posts = Post::orderByDesc("id")->user($request->id)->text($request->text)->paginate("5");
+            return view("crud.posts.index", compact("posts", "request"));
+        
+        }else{
+
+            return view("home");
+
+        }
     }
 
     /**
@@ -82,6 +91,17 @@ class PostController extends Controller
     public function destroy(Request $request, Post $post)
     {
         
+        if(Auth::user()->role->name == "administrator" || Auth::user()->role->name == "moderator"){
+
+            $post->delete();
+
+            return redirect()->route("post.index");
+            
+        }else{
+
+            return view("home");
+
+        }
     }
 
     //Method to users--------------------------------------------------

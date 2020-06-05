@@ -22,4 +22,15 @@ class Post extends Model
     public function project(){
         return $this->belongsTo(Post::class, "project_id");
     }
+    public function scopeText($query, $text){
+        return $query->where('text',"like", "%$text%");
+    }
+    public function scopeUser($query, $user){
+        if($user != null)
+
+            return $query->where('user_id',"=", $user);
+        
+        return $query;
+
+    }
 }

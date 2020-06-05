@@ -23,4 +23,11 @@ class Project extends Model
     public function scopeTitle($query, $title){
         return $query->where('title',"like", "%$title%");
     }
+    public function scopeUser($query, $user){
+        if($user != null)
+            return $query->where('user_id',"=", $user);
+        
+        return $query;
+
+    }
 }
