@@ -22,7 +22,7 @@
             <a href="{{route("chat")}}">Chats</a>
             <a href="{{route("user.config")}}">Config</a>
             <a href="{{route("follows")}}">Follow</a>
-            @if (Auth::user()->role->name == "administrator")
+            @if (Auth::user()->role->name == "administrator" || Auth::user()->role->name == "moderator")
                 <a href="{{route("crud")}}">CRUD</a>
             @endif
             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">LogOut</a>
