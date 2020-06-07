@@ -8,7 +8,7 @@ use App\Room;
 
 class Msg extends Model
 {
-    protected $fillable = ["user_id", "msg", "room_id"];
+    protected $fillable = ["user_id", "msg", "room_id", "viewed"];
     public function user(){
         return $this->belongsTo(User::class);
     }

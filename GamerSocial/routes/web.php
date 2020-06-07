@@ -65,7 +65,12 @@ Route::get("/follows", function(){
 
 })->name("follows")->middleware("verified");
 
-//Pagination routes-----------------------------------------------------------------------------------------------------------------------------
+//GET chat--------------------------------------------------------------------------------------------------------------------------------------
+
+Route::get("/chat", "RoomController@chat")->name("chat")->middleware("verified");
+Route::get("/chat/{user}", "RoomController@room")->name("room")->middleware("verified");
+
+//GET Pagination--------------------------------------------------------------------------------------------------------------------------------
 
 Route::get("/home/paginate", "PaginateController@homeResponse")->name("home.pagination")->middleware("verified");
 Route::get("/project/paginate", "PaginateController@projectResponse")->name("project.pagination")->middleware("verified");
@@ -101,6 +106,11 @@ Route::delete("/crud/file/{file}", "FileController@destroy")->name("file.destroy
 
 Route::post("/createpost", "PostController@userStore")->name("postuser.create")->middleware("verified");
 Route::post("/createproject", "ProjectController@userStore")->name("projectuser.create")->middleware("verified");
+
+//POST chat-------------------------------------------------------------------------------------------------------------------------------------
+
+Route::post("/chat/send", "MsgController@send")->name("msg.send")->middleware("verified");
+Route::post("/chat/receive", "MsgController@receive")->name("msg.receive")->middleware("verified");
 
 //POST CRUD routes------------------------------------------------------------------------------------------------------------------------------
 

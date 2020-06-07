@@ -113,4 +113,17 @@ class User extends Authenticatable implements MustVerifyEmail
 
         }
     }
+    public function getFriends(){
+
+        $friendsId = [];
+        $followers = $this->getFollowers()->all();
+        $following = $this->getFollowing()->all();
+        $friends = array_intersect($followers, $following);
+        foreach ($friends as $friend) {
+            $friendsId[] = $friend["id"];
+        }
+        $friends = User::whereIn("id", $friendsId)->get();
+        return $friends;
+
+    }
 }

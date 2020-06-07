@@ -5,13 +5,14 @@ window.onload = ()=>{
     closeMenu.addEventListener("click", changeMenu);
     let dark = document.getElementById("dark");
     dark.addEventListener("click", changeDark);
-    
+
     if(document.querySelector(".close-post-form")!=undefined){
         let close = document.querySelector(".close-post-form");
         let postIcon = document.querySelector(".post-form-icon");
         postIcon.addEventListener("click", changePostFormVisibility);
         close.addEventListener("click", changePostFormVisibility);
     }
+    
     if(document.querySelector(".close-project-form")!=undefined){
         let close = document.querySelector(".close-project-form");
         let projectIcon = document.querySelector(".project-form-icon");

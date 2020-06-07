@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Msg;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class MsgController extends Controller
 {
@@ -81,5 +83,46 @@ class MsgController extends Controller
     public function destroy(Msg $msg)
     {
         //
+    }
+    //Method for js
+    public function send(Request $request){
+        $request->validate([
+            "to"=>["required"],
+            "from"=>["required"],
+            "room"=>["required"],
+            "text"=>["required"]
+        ]);
+        if(Auth::user()->id == $request->from && Auth::user()->friends(User::find($request->to))){
+
+            $msg = Msg::create([
+                "room_id" => $request->room,
+                "user_id"=>$request->from,
+                "msg"=>$request->text
+            ]);
+
+        }
+
+        return view("chat.msgsend", compact("msg"));
+    }
+    public function receive(Request $request){
+        $request->validate([
+            "to"=>["required"],
+            "from"=>["required"],
+            "room"=>["required"]
+        ]);
+        if(Auth::user()->id == $request->from && Auth::user()->friends(User::find($request->to))){
+
+            $received = Msg::where("room_id", "=", $request->room)->where("user_id", "=", $request->to)->whereNull("viewed")->get();
+
+            foreach ($received as $msg) {
+                $msg->update(["viewed"=>now()]);
+            }
+
+        }
+        if($received->count() == 0){
+            return "";
+        }else{
+            return view("chat.msgreceive", compact("received"));
+        }
     }
 }

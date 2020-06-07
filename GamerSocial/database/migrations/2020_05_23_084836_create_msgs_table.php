@@ -17,6 +17,7 @@ class CreateMsgsTable extends Migration
             $table->id();
             $table->bigInteger("user_id")->unsigned();
             $table->text("msg");
+            $table->date("viewed")->nullable();
             $table->bigInteger("room_id")->unsigned();
             $table->timestamps();
 

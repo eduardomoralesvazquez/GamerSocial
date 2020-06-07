@@ -58,7 +58,7 @@
     </div>
     @else
         @foreach ($projects as $project)
-            <div class="post">
+            <div class="post @if ($project->user->role_id == 3) hu @endif">
                 <div class="post-header">
                     <div>
                         <a href="{{route("projectview", $project)}}"><img src="{{asset($project->img)}}" alt=""></a>

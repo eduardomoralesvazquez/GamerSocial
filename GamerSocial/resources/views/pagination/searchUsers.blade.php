@@ -1,6 +1,6 @@
 
 @foreach ($users as $user)
-<div class="post">
+<div class="post @if ($user->role_id == 3) hu @endif">
     <div class="post-header">
         <div>
             <a href="{{route("profile", $user)}}"><img src="{{asset($user->img)}}" alt=""></a>

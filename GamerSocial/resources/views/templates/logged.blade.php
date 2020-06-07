@@ -19,10 +19,10 @@
     <div id="menu" class="hide-menu">
         <div>
             <a href="{{route("profile", Auth::user())}}">{{Auth::user()->name}}</a>
-            <a href="#">Chats</a>
+            <a href="{{route("chat")}}">Chats</a>
             <a href="{{route("user.config")}}">Config</a>
             <a href="{{route("follows")}}">Follow</a>
-            @if (Auth::user()->role->name == "administrator" || Auth::user()->role->name == "moderator")
+            @if (Auth::user()->role->name == "administrator")
                 <a href="{{route("crud")}}">CRUD</a>
             @endif
             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">LogOut</a>
@@ -36,9 +36,6 @@
     <nav class="navi">
         <div id="option">
             <div id="menu-btn"><img src="{{asset("img/app/icons/burguerWhite.svg")}}" alt="">
-                <div class="notif">
-                    <div></div>
-                </div>
             </div>
             <div><a href="{{route("home")}}"><img src="{{asset("img/app/icons/iconWhite.svg")}}" alt=""></a></div>
             <div><a href="{{route("project")}}"><img src="{{asset("img/app/icons/devWhite.svg")}}" alt=""></a></div>

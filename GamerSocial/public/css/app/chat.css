@@ -1,0 +1,109 @@
+.container{
+    padding: 1em !important;
+}
+.chat-container {
+    max-width: 600px;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    height: 85vh;
+}
+.contact {
+    width: 100%;
+    transition: all 0.2s linear;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.hide-content {
+    width:0% !important;
+}
+.msg-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s linear;
+    overflow:hidden;
+}
+.display{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: lightskyblue solid 1px;
+}
+.display:hover {
+    background-color: #FAFAFA;
+}
+.profile-img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin: 0.5em;
+}
+.profile {
+    display: flex;
+    align-items: center;
+}
+.arrow {
+    color: red;
+    margin-right:2em;
+    width: 1em;
+    height: 1em;
+}
+.chat {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+}
+.msg-container form {
+    padding: 1em;
+    background-color: #FAFAFA;
+    height:5%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.chat-text {
+    width: 70%;
+    border:lightgrey solid 1px;
+    border-radius: 25px;
+    margin-right: 0.5em;
+    height: 1.8em;
+    padding-left: 1em;
+}
+.chat-text:focus {
+    border:#48acff solid 1px;
+}
+.submit-btn {
+    cursor: pointer;
+    border:#48acff solid 1px;
+    border-radius: 25px;
+    padding: 0.4em;
+    background-color: white;
+    color: #48acff;
+}
+.submit-btn:hover {
+    background-color: #48acff;
+    color: white;
+}
+.msg {
+    padding: 0.5em;
+    margin: 1em;
+    border-radius:25px;
+}
+.received {
+    border: solid #48acff 2px;
+    color: white;
+    background-color: #48acff;
+}
+.submited {
+    border: solid #48acff 2px;
+    color: #48acff;
+    background-color: #FAFAFA;
+    text-align: right;
+}

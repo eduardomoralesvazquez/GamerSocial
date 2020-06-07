@@ -36,7 +36,7 @@
                 @endif
                 @if(Auth::user()->friends($user))
 
-                    <div><a href="#"><i class="fas fa-4x fa-comments"></i></a></div>
+                    <div><a href="{{route("room", $user)}}"><i class="fas fa-4x fa-comments"></i></a></div>
 
                 @endif
             @endif
@@ -65,7 +65,7 @@
                 </div>
                 @else
                     @foreach ($user->post()->orderBy("created_at","desc")->get() as $post)
-                        <div class="post">
+                        <div class="post @if ($post->user->role_id == 3) hu @endif">
                             <div class="post-header">
                                 <div>
                                     <img src="{{asset($post->user()->first()->img)}}" alt="">
@@ -113,7 +113,7 @@
                 </div>
                 @else
                     @foreach ($user->projects->sortByDesc("created_at") as $project)
-                        <div class="post">
+                        <div class="post @if ($project->user->role_id == 3) hu @endif">
                             <div class="post-header">
                                 <div>
                                     <a href="{{route("projectview", $project)}}"><img src="{{asset($project->img)}}" alt=""></a>
