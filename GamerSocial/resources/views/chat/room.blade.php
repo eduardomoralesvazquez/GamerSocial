@@ -24,7 +24,7 @@
                 <input type="hidden" name="room" value="{{$room->id}}">
                 <input type="hidden" name="to" value="{{$user->id}}">
                 <input type="hidden" name="from" value="{{$userSend->id}}">
-                <input type="text" name="text" class="chat-text">
+                <input maxlength="500" type="text" name="text" class="chat-text">
                 <input type="submit" value="Submit" class="submit-btn">
             </form>
             <form id="receive-form" style="display:none">

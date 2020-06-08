@@ -223,3 +223,6 @@ textarea:focus {
 .close-post-form:hover {
     color:red;
 }
+.text-container {
+  word-wrap: break-word;
+}

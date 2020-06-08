@@ -32,7 +32,7 @@
                     @endif
                 @endforeach
             </select>
-            <input type="text" name="search" placeholder="Search by name" value="{{$request->search}}">
+            <input maxlength="40" type="text" name="search" placeholder="Search by name" value="{{$request->search}}">
             <button type="submit"><i class="fas fa-2x fa-search"></i></button>
         </form>
     </div>

@@ -28,42 +28,17 @@ Auth::routes(["verify" => true]);
 
 //GET routes-----------------------------------------------------------------------------------------------------------------------------
 
-Route::get("/crud", function () {
-    if((Auth::user()->role->name == "administrator") || (Auth::user()->role->name == "moderator")){    
-        return view("crud.crud");
-    }else{
-        return redirect()->route("home");
-    }
-})->name('crud')->middleware("verified");
+Route::get("/crud", "UserController@crud")->name('crud')->middleware("verified");
 Route::get('/home', 'HomeController@index')->name('home')->middleware("verified");
-Route::get("/dev", function (){ return view("devcontact"); })->name("developer");
-Route::get("/profile/{user}", function(User $user){ return view("profile", compact("user")); })->name("profile")->middleware("verified");;
+Route::get("/dev", "UserController@dev")->name("developer");
+Route::get("/profile/{user}", "UserController@profile")->name("profile")->middleware("verified");;
 Route::get("/follow/{user}", "FollowController@userStore")->name("followuser.create")->middleware("verified");
-Route::get("/config", function(){return view("config");})->name("user.config")->middleware("verified");
-Route::get("/project", function(){
-
-    $projects = Project::orderByDesc("created_at")->paginate(5); 
-    return view("project", compact("projects")); 
-
-})->name("project")->middleware("verified");
-Route::get("/thread/{post}", function($post){ $post = Post::find($post); return view("thread", compact("post")); })->name("thread")->middleware("verified");
-Route::get("/projectview/{project}", function($project){ $project=Project::find($project); return view("projectview", compact("project")); })->name("projectview")->middleware("verified");
-Route::get("/search", function(Request $request){
-
-    $users = User::name($request->search)->orderByDesc("created_at")->paginate(5);
-    $projects = Project::title($request->search)->orderByDesc("created_at")->paginate(5);
-
-    return view("search", compact("users", "projects")); 
-
-})->name("search")->middleware("verified");
-Route::get("/follows", function(){
-
-    $followers = Auth::user()->getFollowers();
-    $following = Auth::user()->getFollowing();
-
-    return view("follow", compact("followers", "following")); 
-
-})->name("follows")->middleware("verified");
+Route::get("/config", "UserController@config")->name("user.config")->middleware("verified");
+Route::get("/project", "ProjectController@project")->name("project")->middleware("verified");
+Route::get("/thread/{post}", "PostController@thread")->name("thread")->middleware("verified");
+Route::get("/projectview/{project}", "ProjectController@projectView")->name("projectview")->middleware("verified");
+Route::get("/search", "UserController@search")->name("search")->middleware("verified");
+Route::get("/follows", "UserController@follow")->name("follows")->middleware("verified");
 
 //GET chat--------------------------------------------------------------------------------------------------------------------------------------
 

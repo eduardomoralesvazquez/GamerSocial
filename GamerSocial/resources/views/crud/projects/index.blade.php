@@ -23,7 +23,7 @@
     <div></div>
     <form action="{{route("project.index")}}" class="search-form">
         <input type="number" class="rol-select" min="1" name="id" placeholder="Search by user id" value="{{$request->id}}">
-        <input type="text" name="title" placeholder="Search by title" value="{{$request->title}}">
+        <input maxlength="40" type="text" name="title" placeholder="Search by title" value="{{$request->title}}">
         <button type="submit"><i class="fas fa-2x fa-search"></i></button>
     </form>
 </div>

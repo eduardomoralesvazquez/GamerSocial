@@ -11,6 +11,7 @@ use App\Role;
 use App\Follow;
 use App\User;
 use App\File;
+use App\Project;
 
 class UserController extends Controller
 {
@@ -250,4 +251,45 @@ class UserController extends Controller
         return redirect()->route("profile", Auth::user());
 
     }
+
+    public function crud(){
+        
+        if((Auth::user()->role->name == "administrator") || (Auth::user()->role->name == "moderator")){    
+            return view("crud.crud");
+        }else{
+            return redirect()->route("home");
+        }
+
+    }
+
+    public function dev(){
+        return view("devcontact");
+    }
+
+    public function profile(User $user){
+        return view("profile", compact("user"));
+    }
+
+    public function config(){
+        return view("config");
+    }
+
+    public function search(Request $request){
+
+        $users = User::name($request->search)->orderByDesc("created_at")->paginate(5);
+        $projects = Project::title($request->search)->orderByDesc("created_at")->paginate(5);
+
+        return view("search", compact("users", "projects")); 
+
+    }
+
+    public function follow(){
+        
+        $followers = Auth::user()->getFollowers();
+        $following = Auth::user()->getFollowing();
+
+        return view("follow", compact("followers", "following")); 
+        
+    }
+
 }

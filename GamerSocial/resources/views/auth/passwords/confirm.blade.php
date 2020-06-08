@@ -14,7 +14,7 @@
     <form action="{{route("password.confirm")}}" method="POST">
         @csrf
         <h3 class="center-label">Please confirm your password before continuing</h3>
-        <input class="text password" type="password" name="password" id="password" placeholder="Password" required>
+        <input maxlength="40" class="text password" type="password" name="password" id="password" placeholder="Password" required>
         <button type="submit" class="btn">Confirm Password</button>
         <a href="{{route("password.request")}}">Forgot Password?</a>
     </form>

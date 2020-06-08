@@ -26,10 +26,6 @@
             })
             .then(htmlContent => {
                 userContainer.innerHTML += htmlContent;
-                page++;
-                if(htmlContent == ""){
-                    window.onscroll = ()=>{};
-                }
                 
             })
             .catch(err => console.log(err));
@@ -42,14 +38,13 @@
                 
             })
             .then(htmlContent => {
-                projectContainer.innerHTML += htmlContent;
-                page++;
-                if(htmlContent == ""){
-                    window.onscroll = ()=>{};
-                }
+                projectContainer.innerHTML += htmlContent;                
+                content += htmlContent;        
                 
             })
             .catch(err => console.log(err));
+            page++;
+            
         }
         
     }

@@ -14,7 +14,7 @@
                 <i class="far fa-times-circle fa-2x close-post-form"></i>
             </div>
             <div class="container-post-form">
-                <textarea class="post-content-form" placeholder="Write something..." name="text" cols="35" rows="10"></textarea>
+                <textarea  maxlength="1000" class="post-content-form" placeholder="Write something..." name="text" cols="35" rows="10"></textarea>
                 <button class="btn" type="submit">Post</button>
             </div>
         </form>

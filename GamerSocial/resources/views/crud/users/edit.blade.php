@@ -17,22 +17,22 @@
             @csrf
             @method("PUT")
             <div>
-                <input type="text" name="name" value="{{$user->name}}">
+                <input maxlength="40" type="text" name="name" value="{{$user->name}}">
             </div>
             <div>
-                <input type="text" name="real_name" value="{{$user->real_name}}">
+                <input maxlength="40" type="text" name="real_name" value="{{$user->real_name}}">
             </div>
             <div>
-                <input type="text" name="last_name" value="{{$user->last_name}}">
+                <input maxlength="80" type="text" name="last_name" value="{{$user->last_name}}">
             </div>
             <div>
-                <input type="email" name="email" value="{{$user->email}}">
+                <input maxlength="80" type="email" name="email" value="{{$user->email}}">
             </div>
             <div>
-                <input type="password" name="password" placeholder="Password">
+                <input maxlength="40" type="password" name="password" placeholder="Password">
             </div>
             <div>
-                <textarea name="description" id="description" cols="30" rows="5" required>{{$user->description}}</textarea>
+                <textarea maxlength="1000" name="description" id="description" cols="30" rows="5" required>{{$user->description}}</textarea>
             </div>
             <div class="file">
                 Perfil <label for="img"><i class="fas fa-2x fa-upload upload"></i></label><input type="file" name="img" id="img">

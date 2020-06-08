@@ -17,9 +17,9 @@
     <form action="{{route('password.update')}}" method="POST">
         @csrf
         <input type="hidden" name="token" value="{{ $token }}">
-        <input class="text" type="email" id="email" name="email" placeholder="Email" value="{{ $email ?? old('email') }}" autofocus required/>
-        <input id="password" type="password" class="text" name="password" required>
-        <input id="password-confirm" type="password" class="text" name="password_confirmation" required>
+        <input maxlength="80" class="text" type="email" id="email" name="email" placeholder="Email" value="{{ $email ?? old('email') }}" autofocus required/>
+        <input maxlength="40" id="password" type="password" class="text" name="password" required>
+        <input maxlength="40" id="password-confirm" type="password" class="text" name="password_confirmation" required>
 
         <button type="submit" class="btn">Reset Password</button>
     </form>

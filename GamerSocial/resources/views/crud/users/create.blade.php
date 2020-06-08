@@ -16,22 +16,22 @@
         <form class="config-form" method="POST" action="{{route("user.store")}}">
             @csrf
             <div>
-                <input type="text" name="name" placeholder="User Name" required>
+                <input maxlength="40" type="text" name="name" placeholder="User Name" required>
             </div>
             <div>
-                <input type="text" name="real_name" placeholder="Real Name" required>
+                <input maxlength="40" type="text" name="real_name" placeholder="Real Name" required>
             </div>
             <div>
-                <input type="text" name="last_name" placeholder="Last Name" required>
+                <input maxlength="80" type="text" name="last_name" placeholder="Last Name" required>
             </div>
             <div>
-                <input type="email" name="email" placeholder="Email" required>
+                <input maxlength="80" type="email" name="email" placeholder="Email" required>
             </div>
             <div>
-                <input type="password" name="password" placeholder="Password" required>
+                <input maxlength="40" type="password" name="password" placeholder="Password" required>
             </div>
             <div>
-                <textarea name="description" id="description" cols="30" rows="5" placeholder="description" required></textarea>
+                <textarea maxlength="1000" name="description" id="description" cols="30" rows="5" placeholder="description" required></textarea>
             </div>
             <div>
                 Roles

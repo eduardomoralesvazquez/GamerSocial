@@ -6,7 +6,7 @@
 @section('content')
 <div class="container">
     <form action="search" method="GET" class="search-form">
-        <input type="text" name="search" id="search" placeholder="search" class="search-text">
+        <input maxlength="40" type="text" name="search" id="search" placeholder="search" class="search-text">
         <button type="submit" class="btn search-btn"><i class="fas fa-2x fa-search search-icon"></i></button>
     </form>
     <div id="profile-box">

@@ -17,7 +17,7 @@
     <form action="{{route('password.email')}}" method="POST">
         @csrf
         <span class="center-label">Please enter your email</span>
-        <input class="text" type="email" id="email" name="email" placeholder="Email" autofocus required/>
+        <input maxlength="80" class="text" type="email" id="email" name="email" placeholder="Email" autofocus required/>
         <button type="submit" class="btn">Send Pasword Reset Link</button>
     </form>
 @endsection

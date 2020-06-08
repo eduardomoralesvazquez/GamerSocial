@@ -14,10 +14,10 @@
             @csrf
             @method("PUT")
             <div>
-                <input type="text" name="name" value="{{Auth::user()->name}}">
+                <input maxlength="40" type="text" name="name" value="{{Auth::user()->name}}">
             </div>
             <div>
-                <textarea name="description" id="description" cols="30" rows="5">{{Auth::user()->description}}</textarea>
+                <textarea maxlength="1000" name="description" id="description" cols="30" rows="5">{{Auth::user()->description}}</textarea>
             </div>
             <div class="file">
                 Perfil <label for="img"><i class="fas fa-2x fa-upload upload"></i></label><input type="file" name="img" id="img">

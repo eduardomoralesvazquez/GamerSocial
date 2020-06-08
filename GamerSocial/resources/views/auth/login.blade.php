@@ -15,9 +15,9 @@
             <form action="{{route('login')}}" method="POST">
                 @csrf
 
-                <input class="text" type="email" id="email" name="email" placeholder="Email" value="{{ old('email') }}" autofocus required>
+                <input maxlength="80" class="text" type="email" id="email" name="email" placeholder="Email" value="{{ old('email') }}" autofocus required>
                 <div id="textpass">
-                    <input class="text password" type="password" name="password" id="password" placeholder="Password" required autocomplete="current-password">
+                    <input maxlength="40" class="text password" type="password" name="password" id="password" placeholder="Password" required autocomplete="current-password">
                     <div class="btn-show"><i id="show" class="far fa-eye" style="color:white;"></i></div>
                 </div>
                 <div id="check">

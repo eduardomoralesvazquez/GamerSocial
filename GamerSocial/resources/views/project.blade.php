@@ -24,7 +24,7 @@
             </div>
             <div class="container-project-form">
                 <div class="title-container">
-                    <input type="text" name="title" class="title" id="title" placeholder="What is the name of your project?">
+                    <input maxlength="40" type="text" name="title" class="title" id="title" placeholder="What is the name of your project?">
                 </div>
                 <div class="file">
                     Project image <label for="img"><i class="fas fa-2x fa-upload upload"></i></label><input type="file" name="img" id="img">
@@ -33,10 +33,10 @@
                     Gallery <label for="files"><i class="fas fa-2x fa-upload upload"></i></label><input type="file" name="files[]" id="files" multiple>
                 </div>
                 <div class="summary-container">
-                    <textarea class="project-content-form" placeholder="What is your project about?" row="auto" name="summary"></textarea>
+                    <textarea maxlength="1000" class="project-content-form" placeholder="What is your project about?" row="auto" name="summary"></textarea>
                 </div>
                 <div class="title-container">
-                    <input type="text" name="link" class="title" id="link" placeholder="Is not enough with images?, link your project!">
+                    <input maxlength="300" type="text" name="link" class="title" id="link" placeholder="Is not enough with images?, link your project!">
                 </div>
                 <button class="btn" type="submit">Make Project</button>
             </div>

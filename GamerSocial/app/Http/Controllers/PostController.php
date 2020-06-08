@@ -167,4 +167,7 @@ class PostController extends Controller
 
         }
     }
+    public function thread(Post $post){
+        return view("thread", compact("post"));
+    }
 }

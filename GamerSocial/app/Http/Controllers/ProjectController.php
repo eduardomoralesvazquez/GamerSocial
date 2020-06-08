@@ -181,4 +181,17 @@ class ProjectController extends Controller
                 break;
         }
     }
+    public function project(){
+        
+        $projects = Project::orderByDesc("created_at")->paginate(5); 
+        return view("project", compact("projects"));
+        
+    }
+    
+    //Method to users
+
+    public function projectView(Project $project){
+        return view("projectview", compact("project"));
+    }
+
 }
