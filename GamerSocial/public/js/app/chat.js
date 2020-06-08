@@ -17,7 +17,7 @@ function sendMsg(e){
     if(msg.trim() != ""){
         chatText.value = chatText.value.trim();
         let data = new FormData(document.getElementById("send-form"));
-        fetch("/GamerSocial/GamerSocial/public/chat/send", {
+        fetch("/public/chat/send", {
             headers: {
                 "X-CSRF-TOKEN": token
             },
@@ -43,7 +43,7 @@ function sendMsg(e){
 function receiveMsg(){
     
     let data = new FormData(document.getElementById("receive-form"));
-    fetch("/GamerSocial/GamerSocial/public/chat/receive", {
+    fetch("/public/chat/receive", {
         headers: {
             "X-CSRF-TOKEN": token
         },

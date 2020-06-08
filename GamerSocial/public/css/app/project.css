@@ -1,4 +1,3 @@
-
 .project-form-icon-container {
     position: fixed;
     top: 90vh;
@@ -47,6 +46,8 @@
     width: 90%;
 }
 .project-content-form{
+    border:solid 1px lightgrey;
+    border-radius: 10px;
     width: 100%;
     height: 100%;
 }

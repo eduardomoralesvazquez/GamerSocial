@@ -17,7 +17,7 @@
             const userContainer = document.getElementById("post-container");
             const projectContainer = document.getElementById("project-container");
             
-            fetch("/GamerSocial/GamerSocial/public/search/paginate/user?page="+page+"&search="+getFirstGet(), {
+            fetch("/search/paginate/user?page="+page+"&search="+getFirstGet(), {
                     method:"get"
             })
             .then(response =>{
@@ -34,7 +34,7 @@
             })
             .catch(err => console.log(err));
             
-            fetch("/GamerSocial/GamerSocial/public/search/paginate/project?page="+page+"&search="+getFirstGet(), {
+            fetch("/search/paginate/project?page="+page+"&search="+getFirstGet(), {
                     method:"get"
             })
             .then(response =>{

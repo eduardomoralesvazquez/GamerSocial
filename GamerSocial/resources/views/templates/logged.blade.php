@@ -35,11 +35,11 @@
     </div>
     <nav class="navi">
         <div id="option">
-            <div id="menu-btn"><img src="{{asset("img/app/icons/burguerWhite.svg")}}" alt="">
+            <div id="menu-btn"><img title="menu" src="{{asset("img/app/icons/burguerWhite.svg")}}" alt="">
             </div>
-            <div><a href="{{route("home")}}"><img src="{{asset("img/app/icons/iconWhite.svg")}}" alt=""></a></div>
-            <div><a href="{{route("project")}}"><img src="{{asset("img/app/icons/devWhite.svg")}}" alt=""></a></div>
-            <div><a href="{{ route('search') }}"><img src="{{asset("img/app/icons/searchWhite.svg")}}" alt=""></a></div>
+            <div><a title="home" href="{{route("home")}}"><img src="{{asset("img/app/icons/iconWhite.svg")}}" alt=""></a></div>
+            <div><a title="projects" href="{{route("project")}}"><img src="{{asset("img/app/icons/devWhite.svg")}}" alt=""></a></div>
+            <div><a title="search" href="{{ route('search') }}"><img src="{{asset("img/app/icons/searchWhite.svg")}}" alt=""></a></div>
         </div>
     </nav>
     @yield("content")

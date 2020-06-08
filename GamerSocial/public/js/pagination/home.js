@@ -5,7 +5,7 @@
             
             const container = document.querySelector(".container");
             
-            fetch("/GamerSocial/GamerSocial/public/home/paginate?page="+page, {
+            fetch("/home/paginate?page="+page, {
                     method:"get"
             })
             .then(response =>{

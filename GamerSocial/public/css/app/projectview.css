@@ -36,3 +36,8 @@ hr {
 .link-icon:hover{
     color: #48acff;
 }
+.summary {
+    
+    max-width: 600px !important;
+
+}
