@@ -85,6 +85,7 @@ class RoomController extends Controller
     {
         //
     }
+    //Method for users
     public function chat(){
         $friends = Auth::user()->getFriends();
 

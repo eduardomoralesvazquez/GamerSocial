@@ -109,7 +109,7 @@ class ProjectController extends Controller
         }
     }
 
-    //Method to users-----------------------------------------------------------
+    //Method for users-----------------------------------------------------------
 
     public function userStore(Request $request)
     {
@@ -187,8 +187,6 @@ class ProjectController extends Controller
         return view("project", compact("projects"));
         
     }
-    
-    //Method to users
 
     public function projectView(Project $project){
         return view("projectview", compact("project"));

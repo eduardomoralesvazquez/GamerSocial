@@ -17,7 +17,7 @@ function sendMsg(e){
     if(msg.trim() != ""){
         chatText.value = chatText.value.trim();
         let data = new FormData(document.getElementById("send-form"));
-        fetch("/public/chat/send", {
+        fetch("/chat/send", {
             headers: {
                 "X-CSRF-TOKEN": token
             },
@@ -43,7 +43,7 @@ function sendMsg(e){
 function receiveMsg(){
     
     let data = new FormData(document.getElementById("receive-form"));
-    fetch("/public/chat/receive", {
+    fetch("/chat/receive", {
         headers: {
             "X-CSRF-TOKEN": token
         },
@@ -56,8 +56,6 @@ function receiveMsg(){
 
     })
     .then(htmlContent => {
-
-        console.log(htmlContent);
         
         if(htmlContent != "" && htmlContent.substr(0,5) == "<span"){
             msgContainer.innerHTML += htmlContent;

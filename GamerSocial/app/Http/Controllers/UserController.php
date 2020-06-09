@@ -47,7 +47,7 @@ class UserController extends Controller
     
     public function store(Request $request)
     {
-        if(Auth::user()->role->name == "administrator" || Auth::user()->role->name == "moderator"){
+        if(Auth::user()->role->name == "administrator"){
 
 
             $request->validate([
@@ -81,7 +81,7 @@ class UserController extends Controller
     
     public function edit(User $user)
     {
-        if(Auth::user()->role->name == "administrator" || Auth::user()->role->name == "moderator"){
+        if(Auth::user()->role->name == "administrator"){
 
             $roles = Role::orderBy("id")->get();
             return view("crud.users.edit", compact("user", "roles"));
@@ -95,7 +95,7 @@ class UserController extends Controller
     
     public function update(Request $request, User $user){
 
-            if(Auth::user()->role->name == "administrator" || Auth::user()->role->name == "moderator"){
+            if(Auth::user()->role->name == "administrator" ){
 
                 
             $request->validate([
@@ -167,7 +167,7 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        if(Auth::user()->role->name == "administrator" || Auth::user()->role->name == "moderator"){
+        if(Auth::user()->role->name == "administrator" ){
 
             $projects = $user->projects()->get();
             
@@ -202,7 +202,7 @@ class UserController extends Controller
         }
     }
     
-    //Method to users--------------------------------------------------------
+    //Method for users--------------------------------------------------------
     
     public function userUpdate(Request $request){
         $request->validate([
